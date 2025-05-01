@@ -5,9 +5,8 @@ HealMate is a healthcare AI project that leverages a T5-based generative AI mode
 ## Project Structure
 
 - `backend/`  
-  Contains the backend Flask application and the trained T5 disease treatment model.  
-  - `app.py`: Main Flask app exposing a `/predict` API endpoint.  
-  - `t5_disease_treatment_model/`: Directory containing the trained T5 model files and tokenizer configuration.
+  Contains the backend Flask application.  
+  - `app.py`: Main Flask app exposing a `/predict` API endpoint that loads the T5 disease treatment model from Hugging Face hub.  
 
 - `frontend/`  
   Contains the React frontend application built with Vite.  
@@ -19,7 +18,7 @@ HealMate is a healthcare AI project that leverages a T5-based generative AI mode
 
 - Built with **Flask**, a lightweight Python web framework.  
 - Uses **Flask-CORS** to enable cross-origin requests from the frontend.  
-- Integrates the **Hugging Face Transformers** library to load a pretrained **T5** model for disease treatment prediction.  
+- Integrates the **Hugging Face Transformers** library to load a pretrained **T5** model for disease treatment prediction directly from the Hugging Face model hub (`Simha10/healmate-model`).  
 - Exposes a REST API endpoint `/predict` that accepts POST requests with symptoms and returns predicted treatment plans.
 
 ## Frontend
