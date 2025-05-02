@@ -2,16 +2,15 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS
 from transformers import T5Tokenizer, T5ForConditionalGeneration
 import torch
+import os
 
 app = Flask(__name__)
-CORS(app)
+CORS(app)  # Enable CORS for frontend communication
 
-# ✅ Load from Hugging Face
+# Load the trained model from Hugging Face Hub
 model_name = "Simha10/healmate-model"
-print(f"Loading model from Hugging Face: {model_name}")
 tokenizer = T5Tokenizer.from_pretrained(model_name)
 model = T5ForConditionalGeneration.from_pretrained(model_name)
-print("Model loaded.")
 
 @app.route('/predict', methods=['POST'])
 def predict():
@@ -31,9 +30,9 @@ def predict():
     return jsonify({"prediction": output_text})
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000, debug=True)
-
-
+    # Use Render-assigned PORT if available, otherwise default to 5000 for local
+    port = int(os.environ.get("PORT", 5000))
+    app.run(host='0.0.0.0', port=port, debug=True)
 
 
 
